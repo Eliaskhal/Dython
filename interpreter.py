@@ -1,16 +1,28 @@
 import re
 
-class Tokenizer:
+class Lexer:
     pass
 
-class Lexer:
+class Tokenizer:
     def __init__(self, source_code):
         self.source_code = source_code
         self.arithmetic_parameters = {
             '+' : 'PLUS',
             '-' : 'MINUS',
+            '**' : 'POWER',
             '*' : 'TIMES',
-            '/' : 'OVER'}
+            '//' : 'INTDEVISION',
+            '/' : 'DEVISION',
+            }
+        self.logical_parameters = {
+            '==' : 'EQUALS',
+            '<=' : 'LTOE',
+            '>=' : 'GTOE',
+            '>' : 'GREATERTHAN',
+            '<' : 'LESSTHAN',
+            'o' : 'AND',
+            'ola' : 'OR'
+        }
         self.special_characters_tokens = {
             '(' : 'LEFT_PAREN',
             ')' : 'RIGHT_PAREN',
@@ -18,14 +30,19 @@ class Lexer:
             ']' : 'RIGHT_BRACKET',
             '{' : 'LEFT_BRACE',
             '}' : 'RIGHT_BRACE',
-            "'" : 'SINGLE_QUOTE',}
+            "'" : 'SINGLE_QUOTE',
+            ':' : 'DO',
+            '\t' : 'TAB'
+            }
 
-        self.keywords = {'ma7ad' : 'WHILE',
-                        'likol' : 'FOR',
-                        'ida' : 'IF',
-                        'wila' : 'ELSE'} 
+        self.keywords = {
+            'ma7ad' : 'WHILE',
+            'likol' : 'FOR',
+            'ida' : 'IF',
+            'wila' : 'ELSE'
+            } 
 
-    def lex(self):
+    def tokenize(self):
         tokens = []
         for line in self.source_code.split("\n"):
             current_position = 0
@@ -97,7 +114,7 @@ class Parser:
     def parse(self):
         with open(self.file, 'r') as f:
             code = f.read()
-        lexer = self.Lexer(code)
-        tokens = lexer.lex()
+        tokenizer = self.Tokenizer(code)
+        tokens = tokenizer.tokenize()
         print(tokens)
         
