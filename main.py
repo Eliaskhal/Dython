@@ -5,5 +5,12 @@ from interpreter import Lexer
 from interpreter import Parser
 
 if __name__ == "__main__":
-    Parser = Parser(Lexer, Tokenizer, argv[1])
-    Parser.parse()
+    if len(argv) > 1:
+        code = argv[1]
+        parser = Parser(Lexer, Tokenizer, code, False)
+        parser.parse()
+    else: 
+        while True:
+            parser = Parser(Lexer, Tokenizer, input('>>> '), True)
+            parser.parse()
+    
