@@ -9,18 +9,19 @@ class Tokenizer:
         self.arithmetic_parameters = {
             '+' : 'PLUS',
             '-' : 'MINUS',
-            '**' : 'POWER',
+            #'**' : 'POWER',
             '*' : 'TIMES',
-            '//' : 'INTDEVISION',
+            #'//' : 'INTDEVISION',
             '/' : 'DEVISION',
             }
         self.logical_parameters = {
             '==' : 'EQUALS',
+            '!=' : 'NEQUALS',
             '<=' : 'LTOE',
             '>=' : 'GTOE',
             '>' : 'GREATERTHAN',
             '<' : 'LESSTHAN',
-            'o' : 'AND',
+            'wa' : 'AND',
             'ola' : 'OR'
         }
         self.special_characters_tokens = {
@@ -85,21 +86,33 @@ class Tokenizer:
                         current_position += len(keyword)
                         tokens.append((token_type, token_value))
                         break
+                    continue
                 
                 for keyword, token_type in self.arithmetic_parameters.items():
-                    if re.match(re.escape(keyword), line[current_position:]):
+                    if re.match(re.escape(keyword), line[current_position]):
                         token_value = keyword
-                        current_position += 1
+                        current_position += len(keyword)
                         tokens.append((token_type, token_value))
                         break
+                    continue
 
                 
                 for keyword, token_type in self.special_characters_tokens.items():
                     if re.match(re.escape(keyword), line[current_position]):
                         token_value = keyword
-                        current_position += 1
+                        current_position += len(keyword)
                         tokens.append((token_type, token_value))
                         break
+                    continue
+                    
+                for keyword, token_type in self.logical_parameters.items():
+                    if re.match(re.escape(keyword), line[current_position:]):
+                        token_value = keyword
+                        current_position += len(keyword)
+                        tokens.append((token_type, token_value))
+                        break
+                    
+                current_position += 1
 
             tokens.append(('\n', 'NEWLINE'))
         
