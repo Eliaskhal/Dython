@@ -33,7 +33,7 @@ class Translator:
             'avec': 'with',
             'lambda': 'lambda',
             'imprimer' : 'print',
-            'entrer' : 'input'
+            'entrer' : 'input',
             }
 
 
@@ -73,7 +73,7 @@ class Parser:
         self.Translator = Translator
         self.input = input
         
-    def parse(self):
+    def parse(self, global_vars, local_vars):
         translator = Translator()
         if not self.is_line:
             with open(self.input, 'r') as f:
@@ -81,7 +81,8 @@ class Parser:
             new_code = translator.translate(code)
             exec(new_code)
         else: 
-            new_line = translator.translate_line(self.input)
+            new_line = translator.translate(self.input)
             print(new_line)
-            exec(new_line)
+            exec(new_line, global_vars, local_vars)
+            return global_vars, local_vars
         
