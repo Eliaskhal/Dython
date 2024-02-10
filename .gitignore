@@ -1,6 +1,6 @@
 code.dy
 .vscode
-interpreter.py
+_interpreter.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
