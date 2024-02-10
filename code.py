@@ -1,4 +1,4 @@
-x = input("Entrer un nombre: ")
+x = int(input("Entrer un nombre: "))
 if x == 6:
     while x > 0:
         print(x)

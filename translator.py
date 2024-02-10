@@ -78,9 +78,8 @@ class Parser:
         if not self.is_line:
             with open(self.input, 'r') as f:
                 code = f.read()
-            with open(self.input[:self.input.find('.')] + '.py', 'w') as new_f:
-                new_code = translator.translate(code)
-                new_f.write(new_code)
+            new_code = translator.translate(code)
+            exec(new_code)
         else: 
             new_line = translator.translate_line(self.input)
             print(new_line)
