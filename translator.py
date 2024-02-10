@@ -40,22 +40,32 @@ class Translator:
     def translate(self, code):
         py_code = ''
         current_position = 0
+        inside_string = False
+        inside_comment = False
         while current_position < len(code):
-            # Check for keywords
-            for keyword, translation in self.keywords.items():
-                if re.match(fr'\b{re.escape(keyword)}\b', code[current_position:]):
-                    py_code += translation
-                    current_position += len(keyword)
-                    break
-                continue
-            
-            py_code += code[current_position]
-            current_position += 1
-        
+            # Check for quotes and toggle inside_string
+            if code[current_position] == '"':
+                inside_string = not inside_string
+
+            # Check for comments and toggle inside_comment
+            if code[current_position] == '#':
+                inside_comment = not inside_comment
+
+            # Check for keywords if not inside string or comment
+            if not inside_string and not inside_comment:
+                for keyword, translation in self.keywords.items():
+                    if re.match(fr'\b{re.escape(keyword)}\b', code[current_position:]):
+                        py_code += translation
+                        current_position += len(keyword)
+                        break
+                else:
+                    py_code += code[current_position]
+                    current_position += 1
+            else:
+                py_code += code[current_position]
+                current_position += 1
+
         return py_code
-    
-    
-    
 
 class Parser:
     def __init__(self, Translator, input, is_line):
