@@ -20,8 +20,8 @@ class Tokenizer:
             '>=' : 'GTOE',
             '>' : 'GREATERTHAN',
             '<' : 'LESSTHAN',
-            'wa' : 'AND',
-            'ola' : 'OR'
+            'et' : 'AND',
+            'ou' : 'OR'
         }
         self.special_characters_tokens = {
             '(' : 'LEFT_PAREN',
@@ -35,11 +35,38 @@ class Tokenizer:
             }
 
         self.keywords = {
-            'ma7ad' : 'WHILE',
-            'likol' : 'FOR',
-            'ida' : 'IF',
-            'wila' : 'ELSE'
-            } 
+            'importer': 'import',
+            'de': 'from',
+            'comme': 'as',
+            'def': 'def',
+            'classe': 'class',
+            'retour': 'return',
+            'si': 'if',
+            'sinon': 'else',
+            'sinonsi': 'elif',
+            'tantque': 'while',
+            'pour': 'for',
+            'dans': 'in',
+            'arret': 'break',
+            'continuer': 'continue',
+            'passer': 'pass',
+            'Vrai': 'True',
+            'Faux': 'False',
+            'Aucun': 'None',
+            'et': 'and',
+            'ou': 'or',
+            'pas': 'not',
+            'est': 'is',
+            'essayer': 'try',
+            'sauf': 'except',
+            'enfin': 'finally',
+            'lever': 'raise',
+            'affirmer': 'assert',
+            'avec': 'with',
+            'lambda': 'lambda'
+            }
+
+
 
     def tokenize(self, line):
         tokens = []
