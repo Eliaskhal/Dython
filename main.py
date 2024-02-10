@@ -10,7 +10,7 @@ if __name__ == "__main__":
     if len(argv) > 1:
         code = argv[1]
         parser = Parser(Translator, code, False)
-        parser.parse()
+        parser.parse({}, {})
     else: 
         while True:
             parser = Parser(Translator, input('>>> '), True)

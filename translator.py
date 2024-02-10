@@ -41,7 +41,7 @@ class Translator:
             'lire': 'read',
             'ecrire': 'write',
             'append': 'append',
-            'len': 'len',
+            'longeur': 'len',
             'chaine': 'str',
             'flottant': 'float',
             'liste': 'list',
@@ -62,25 +62,33 @@ class Translator:
             'id': 'id',
             'ordre': 'ord',
             'lettre': 'chr',
+            'soi' : 'self',
+            'temps' : 'time', 
+            'dormir' : 'sleep'
             }
 
 
     def translate(self, code):
         py_code = ''
         current_position = 0
-        inside_string = False
+        inside_string1 = False
+        inside_string2 = False
         inside_comment = False
         while current_position < len(code):
             # Check for quotes and toggle inside_string
             if code[current_position] == '"':
-                inside_string = not inside_string
+                inside_string1 = not inside_string1
+            if code[current_position] == "'":
+                inside_string1 = not inside_string1
 
             # Check for comments and toggle inside_comment
-            if code[current_position] == '#':
-                inside_comment = not inside_comment
+            if code[current_position] == '#' and not inside_string1 and not inside_string2:
+                while current_position < len(code) and code[current_position] != '\n':
+                    current_position += 1
+                continue
 
             # Check for keywords if not inside string or comment
-            if not inside_string and not inside_comment:
+            if not inside_string1 and not inside_string2 and not inside_comment:
                 for keyword, translation in self.keywords.items():
                     if re.match(fr'\b{re.escape(keyword)}\b', code[current_position:]):
                         py_code += translation
@@ -107,6 +115,7 @@ class Parser:
             with open(self.input, 'r') as f:
                 code = f.read()
             new_code = translator.translate(code)
+            with open('new_code.py', 'w') as f: f.write(new_code)
             exec(new_code)
         else: 
             new_line = translator.translate(self.input)
