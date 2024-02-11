@@ -1,0 +1,30 @@
+# Importer des modules
+importer random
+
+# Définir une classe
+classe JeuDeDes:
+    def __init__(soi):
+        soi.resultat = Aucun
+
+    def lancer_de(soi):
+        soi.resultat = random.randint(1, 6)
+
+# Instancier un objet de la classe
+jeu = JeuDeDes()
+
+# Lancer le dé
+jeu.lancer_de()
+
+# Afficher le résultat
+imprimer(f"Le résultat du lancer de dé est : {jeu.resultat}")
+
+# Utiliser une boucle
+pour _ dans plage(3):
+    jeu.lancer_de()
+    print(f"Nouveau résultat : {jeu.resultat}")
+
+# Conditionnelle
+si jeu.resultat % 2 == 0:
+    imprimer("Le résultat est pair.")
+sinon:
+    imprimer("Le résultat est impair.")
