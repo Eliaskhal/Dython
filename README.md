@@ -28,7 +28,7 @@ dist/dython.exe
 - `global_vars` and `local_vars`: Global and local variable dictionaries used during code execution.
 - The script checks if command line arguments are provided; if so, it processes the file. Otherwise, it enters an interactive loop for user input.
 
-## `translator.py`
+## translator.py
 ### Description
 `translator.py` contains the Translator and Parser classes responsible for translating French keywords to Python and parsing input, respectively.
 
@@ -73,3 +73,7 @@ The `keywords` dictionary maps French keywords to their Python equivalents
 | quitter     | exit      | diviser     | split     |
 
 </center>
+
+## Notes
+- This project is intended for educational purposes, providing a fun and engaging way for kids to learn programming concepts using their native language.
+- Exercise caution when using the translator for non-educational purposes, as the translation might not cover all edge cases or Python features.
