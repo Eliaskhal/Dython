@@ -36,6 +36,7 @@ dist/dython.exe
 The `keywords` dictionary maps French keywords to their Python equivalents
 
 <center>
+
 | French      | English   | French      | English   |
 |:------------|:----------:|:------------|:---------:|
 | importer    | import    | et          | and       |
@@ -71,3 +72,4 @@ The `keywords` dictionary maps French keywords to their Python equivalents
 | entrer      | input     | remplacer   | replace   |
 | quitter     | exit      | diviser     | split     |
 
+</center>
