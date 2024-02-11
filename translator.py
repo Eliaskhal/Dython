@@ -119,7 +119,6 @@ class Parser:
             exec(new_code)
         else: 
             new_line = translator.translate(self.input)
-            print(new_line)
             exec(new_line, global_vars, local_vars)
             return global_vars, local_vars
         
