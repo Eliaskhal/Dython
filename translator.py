@@ -115,7 +115,7 @@ class Parser:
             with open(self.input, 'r') as f:
                 code = f.read()
             new_code = translator.translate(code)
-            # with open('new_code.py', 'w') as f: f.write(new_code)
+            with open('new_code.py', 'w') as f: f.write(new_code)
             exec(new_code)
         else: 
             new_line = translator.translate(self.input)
